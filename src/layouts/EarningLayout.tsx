@@ -1,9 +1,9 @@
 import React from "react";
 import { NavBar,TopBar } from "@/components/partials";
 // import Dialogs from "@/components/general-ui/dialog";
-import Dashbord from "@/components/dashboard/ui";
+import EarningDashboard from "@/components/dashboard/ui/EarningDashboard";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default function EarningLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className=" min-h-screen" >
       <div className="flex">
@@ -13,7 +13,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <TopBar />
       <div className="bg-gray-background container h-full">
         {children}
-        <Dashbord/>
+        <EarningDashboard/>
         </div>
       </div>
       </div>

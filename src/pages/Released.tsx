@@ -1,5 +1,5 @@
 import { Heading } from "@radix-ui/themes";
-import { SEOWrapper, AppLayout } from "@/layouts";
+import { SEOWrapper, ReleasedTableLayout } from "@/layouts";
 import { useExampleQuery, ExampleAdapter } from "@/adapters/ExampleAdapter";
 import { queryKeys } from "@/lib/constants";
 
@@ -9,7 +9,7 @@ const metaData = {
   content: "React Starter Project",
 };
 
-export default function Home() {
+export default function ReleasedTableDashboard() {
   //example of how to use the query adapter, this returns all the data from react query
   const { data, isLoading, error, isError, ...rest } = useExampleQuery(
     ExampleAdapter.exampleQueryApiCall1,
@@ -19,9 +19,9 @@ export default function Home() {
 
   return (
     <SEOWrapper metaData={metaData}>
-      <AppLayout>
-        <Heading className="p-[20px] pt-8 pb-1">Dashboard</Heading>
-      </AppLayout>
+      <ReleasedTableLayout>
+        <Heading className="p-[20px] pt-8 pb-1">Released</Heading>
+      </ReleasedTableLayout>
     </SEOWrapper>
   );
 }
