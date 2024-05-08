@@ -1,0 +1,13 @@
+.custom-quill-editor{
+	height: 300%;
+}
+
+.option {
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.option:hover {
+	background-color: #f0f0f0;
+}

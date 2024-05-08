@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { CiSearch } from 'react-icons/ci';
+import { CiSearch, CiEdit } from 'react-icons/ci';
 import { FaSearch, FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
-import { CiEdit } from "react-icons/ci";
-import { TfiCommentAlt } from "react-icons/tfi";
-import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash  } from "react-icons/io";
+import { TfiCommentAlt } from 'react-icons/tfi';
+import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash, IoMdAdd } from 'react-icons/io';
+import { IoGridOutline } from 'react-icons/io5';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const DataTables = ({ data,title }) => {
+const StoreTables = ({ data }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
+	const navigate = useNavigate();
 
   const toggleDropdown = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -30,20 +32,24 @@ const DataTables = ({ data,title }) => {
     setCurrentPage(1); // Reset to first page when searching
   };
 
+  const handleRowClick = (id) => {
+		navigate(`/store/detail/${id}`);
+  };
+
   return (
     <div className="overflow-x-auto w-[100%] sm:w-full rounded-lg">
       {/* Search */}
       <div className="flex items-center justify-between mb-4 px-4 py-2">
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           {/* Empty badge with blue color */}
           <div className="bg-orange-400 rounded-full h-6 w-3 mr-2"></div>
 
           {/* Title "Overview" */}
-          <div className="text-lg font-semibold mr-auto">{title}</div>
+          <div className="text-lg font-semibold mr-auto">Stores</div>
 
           <div className="relative ml-3 rounded-md">
             <div className="absolute inset-y-0 left-0 flex items-center pl-1">
-              <CiSearch size={20}/>
+              <CiSearch size={20} />
             </div>
             <input
               type="text"
@@ -54,6 +60,15 @@ const DataTables = ({ data,title }) => {
             />
           </div>
         </div>
+
+        <div className="flex items-center justify-between">
+          <Link to="/new/product/">
+            <button className="flex relative rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <IoMdAdd className="mr-1" />
+              Create store
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Table */}
@@ -62,37 +77,50 @@ const DataTables = ({ data,title }) => {
           <tr>
             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               <label className="inline-flex items-center">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded shadow-sm focus:ring-blue-400"/>
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-5 w-5 text-blue-500 rounded shadow-sm focus:ring-blue-400"
+                />
               </label>
             </th>
             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
             <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sales</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
+            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
             <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
-            <tr key={index} className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md">
+            <tr
+              key={index}
+              className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md cursor-pointer"
+            >
               <td className="px-2 py-2 whitespace-nowrap">
                 <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded border-5 border-gray-500 shadow-sm focus:ring-blue-400" />
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5 text-blue-500 rounded border-5 border-gray-500 shadow-sm focus:ring-blue-400"
+                  />
                 </label>
               </td>
-              <td className="px-1 py-2 whitespace-nowrap">
+              <td className="px-1 py-2 whitespace-nowrap" onClick={() => handleRowClick(item.id)}> 
                 <div className="inline-flex items-center justify-between">
                   <img src={item.image} alt="Product" className="h-16 w-17 rounded" />
-                  <div className='pl-3'>
-                    <div className="text-sm font-medium text-gray-900">{item.name}</div>
+                  <div className="pl-3">
+                    <div className="text-sm font-medium text-blue-900">{item.name}</div>
                     <div className="text-sm font-light text-gray-500">{item.category}</div>
                   </div>
                 </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
-                  <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${item.status === 'Active' ? 'bg-green-50 text-green-700 ring-green-600/10' : 'bg-red-50 text-red-700 ring-red-600/10'}`}>
+                  <span
+                    className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${
+                      item.status === 'Active' ? 'bg-green-50 text-green-700 ring-green-600/10' : 'bg-red-50 text-red-700 ring-red-600/10'
+                    }`}
+                  >
                     {item.status}
                   </span>
                 </div>
@@ -108,7 +136,11 @@ const DataTables = ({ data,title }) => {
                 </div>
                 <div className="ml-1">
                   {item.percentage && (
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${item.percentage > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                    <span
+                      className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
+                        item.percentage > 0 ? 'text-green-700' : 'text-red-700'
+                      }`}
+                    >
                       {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
                       {item.percentage}%
                     </span>
@@ -118,7 +150,9 @@ const DataTables = ({ data,title }) => {
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="flex items-center justify-center">
                   <div className="text-sm font-medium text-gray-900">
-                    <span className="inline-flex items-center justify-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    <span
+                      className="inline-flex items-center justify-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
+                    >
                       {item.views}
                     </span>
                   </div>
@@ -129,8 +163,10 @@ const DataTables = ({ data,title }) => {
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="flex items-center justify-between ml-2 space-x-4">
-                  <div className='border rounded-full border-white'><CiEdit/></div>
-                  <TfiCommentAlt/>
+                  <div className="border rounded-full border-white">
+                    <CiEdit />
+                  </div>
+                  <TfiCommentAlt />
                   <div className="relative">
                     <button
                       onClick={() => toggleDropdown(index)}
@@ -143,12 +179,12 @@ const DataTables = ({ data,title }) => {
                       <ul className="absolute right-0 z-10 mt-2 py-1 bg-white border border-gray-200 rounded-md shadow-lg">
                         <li>
                           <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                            <IoIosSettings className="mr-2" /> Edith title & discription
+                            <IoIosSettings className="mr-2" /> Edit title & description
                           </button>
                         </li>
                         <li>
                           <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                            <IoIosCopy className="mr-2" /> Get shearable link
+                            <IoIosCopy className="mr-2" /> Get shareable link
                           </button>
                         </li>
                         <li>
@@ -188,4 +224,4 @@ const DataTables = ({ data,title }) => {
   );
 };
 
-export default DataTables;
+export default StoreTables;

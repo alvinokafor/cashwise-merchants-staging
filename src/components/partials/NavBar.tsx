@@ -14,16 +14,16 @@ export default function NavBar() {
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const Menus = [
-    {title: "Home", icon: <MdAddHomeWork />},
+    {title: "Home",link:"/", icon: <MdAddHomeWork />},
     // {title: "Page", icon: <AiOutlineFileText />},
     // {title: "Product", spacing:true, icon: <BsFileImageFill />},
     {
       title: "Product",
       submenu:true, 
       submenuItems:[
-        {title: "Dashboard"},
-        {title: "Draft"},
-        {title: "Release"},
+        {title: "Dashboard",sublink:"/product/dashboard/"},
+        {title: "Draft",sublink:"/product/draft/"},
+        {title: "Release",sublink:"/product/released/"},
       ],
       icon: <MdProductionQuantityLimits />,
     },
@@ -31,24 +31,24 @@ export default function NavBar() {
       title: "Customers",
       submenu:true, 
       submenuItems:[
-        {title: "Overview"},
-        {title: "Orders"},
+        {title: "Overview",sublink:"/income/earning/"},
+        {title: "Orders",sublink:"/income/earning/"},
       ],
       icon: <LiaUsersSolid />,
     },
-    {title: "Shop", icon: <FaShop />},
+    {title: "Store",link:"/all/store/", icon: <FaShop />},
     {
       title: "Income",
-      submenu:true, 
+      submenu:true,
       submenuItems:[
-        {title: "Earning"},
-        {title: "Refunds"},
-        {title: "Payouts"},
-        {title: "Statements"},
+        {title: "Earning",sublink:"/income/earning/"},
+        {title: "Refunds",sublink:"/income/earning/"},
+        {title: "Payouts",sublink:"/income/earning/"},
+        {title: "Statements",sublink:"/income/earning/"},
       ],
       icon: <AiOutlineBarChart />,
     },
-    {title: "Promote", icon: <AiOutlineMail />},
+    {title: "Promote",link:"/",icon: <AiOutlineMail />},
     // {title: "Profile",spacing:true,icon: <BsPerson />},
     // {title: "Setting", icon: <AiOutlineSetting />},
     // {title: "Logout", icon: <AiOutlineLogout />},
@@ -71,7 +71,7 @@ export default function NavBar() {
                 {menu.icon ? menu.icon : <RiDashboardFill/>}
               </span>
               <span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>
-                {menu.title}
+              <Link to={menu.link}>{menu.title}</Link>
               </span>
               {menu.submenu && open && (
                 <BsChevronDown className={`${submenuOpen && "rotate-180"}`}
@@ -82,7 +82,7 @@ export default function NavBar() {
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
                   <li key={index} className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-light-white rounded-md">
-                    {submenuItem.title}
+                    <Link to={submenuItem.sublink}>{submenuItem.title}</Link>
                   </li>
                 ))}
               </ul>

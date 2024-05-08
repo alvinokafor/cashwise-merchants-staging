@@ -7,11 +7,10 @@ import BarChart from '../modules/BarChart';
 import HeaderFilter from '@/components/general-ui/filterBar';
 import PopularItem from './PopularItem';
 import CardList from '../modules/CardList';
-import DataTable from '@/components/general-ui/table';
-import DataTables from '@/components/general-ui/largTable';
+import StoreTables from '@/components/general-ui/storeTable';
 
 
-export default function ProdDashbord() {
+export default function StoreDashboard() {
     const data = [
         {
           id: 1,
@@ -126,6 +125,7 @@ export default function ProdDashbord() {
       ];
       
       
+      
   const [activeIndex, setActiveIndex] = useState(0); 
 
   const handleToggle = (index: React.SetStateAction<number>) => {
@@ -134,32 +134,13 @@ export default function ProdDashbord() {
   return (
     <div className='container flex flex-wrap justify-between p-6'>
       {/* grid on card */}
-      <Card className="w-full sm:w-full mb-4 mr-2">
-    
-      <HeaderFilter title={"Overview"} color={"bg-orange-300"}/>
-      <CardList/>
+      
 
-      </Card>
-      {/* second barchart */}
-      <Card className="w-full sm:w-[62%] mb-4 mr-2">
-        <HeaderFilter title={"Product activity"} color={"bg-purple-300"}/>
-        {/* <BarChart/> */}
-        <DataTable/>
-      </Card>
-
-      {/* grid 2 card  */}
-      <Card className="w-full sm:w-[36%] mb-4 mr-2">
-      <HeaderFilter  title={"Product view"} color={"bg-gray-100"}/>
-        {/* <PopularItem/> */}
-        <div className='w-auto'>
-            <BarChart/>
-        </div>
-        
-      </Card>
+  
       <Card className="w-full sm:w-[100%] h-auto mb-4 mr-2">
-        {/* <PopularItem/> */}
+      {/* <HeaderFilter title={"Draft products"} color={"bg-purple-300"} /> */}
         {/* <div className='w-[300px]'> */}
-        <DataTables data={data} title={"Products"} />
+        <StoreTables data={data} />
         
       </Card>
     </div>

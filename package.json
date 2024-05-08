@@ -28,7 +28,9 @@
     "react-international-phone": "^4.2.2",
     "react-loading-skeleton": "^3.4.0",
     "react-otp-input": "^3.1.1",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.21.3",
+    "react-toastify": "^10.0.5",
     "sonner": "^1.4.0",
     "zod": "^3.22.4"
   },

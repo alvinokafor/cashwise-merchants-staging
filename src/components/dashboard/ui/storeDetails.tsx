@@ -11,7 +11,7 @@ import DataTable from '@/components/general-ui/table';
 import DataTables from '@/components/general-ui/largTable';
 
 
-export default function ProdDashbord() {
+export default function StoreDetails() {
     const data = [
         {
           id: 1,
@@ -142,14 +142,14 @@ export default function ProdDashbord() {
       </Card>
       {/* second barchart */}
       <Card className="w-full sm:w-[62%] mb-4 mr-2">
-        <HeaderFilter title={"Product activity"} color={"bg-purple-300"}/>
+        <HeaderFilter title={"store activity"} color={"bg-purple-300"}/>
         {/* <BarChart/> */}
         <DataTable/>
       </Card>
 
       {/* grid 2 card  */}
       <Card className="w-full sm:w-[36%] mb-4 mr-2">
-      <HeaderFilter  title={"Product view"} color={"bg-gray-100"}/>
+      <HeaderFilter  title={"store view"} color={"bg-gray-100"}/>
         {/* <PopularItem/> */}
         <div className='w-auto'>
             <BarChart/>
@@ -159,7 +159,7 @@ export default function ProdDashbord() {
       <Card className="w-full sm:w-[100%] h-auto mb-4 mr-2">
         {/* <PopularItem/> */}
         {/* <div className='w-[300px]'> */}
-        <DataTables data={data} title={"Products"} />
+        <DataTables data={data} title={"Stores"} />
         
       </Card>
     </div>

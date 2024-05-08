@@ -4,4 +4,7 @@ import ProdDashLayout from "./ProdDashboardLayout";
 import EarningLayout from "./EarningLayout";
 import DraftTableLayout from "./DraftTableLayout";
 import ReleasedTableLayout from "./ReleasedLayout";
-export { SEOWrapper, AppLayout,ProdDashLayout,EarningLayout,DraftTableLayout,ReleasedTableLayout };
+import NewProdLayout from './NewProdLayout';
+import StoreTableLayout from './storeLayout';
+import StoreDashLayout from './storeDashbordLayout'
+export { SEOWrapper,StoreTableLayout,StoreDashLayout, AppLayout,NewProdLayout,ProdDashLayout,EarningLayout,DraftTableLayout,ReleasedTableLayout };

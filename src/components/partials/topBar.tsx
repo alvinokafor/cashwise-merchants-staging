@@ -5,6 +5,7 @@ import { HiBars3,HiXMark } from "react-icons/hi2";
 import { IoMdAdd } from "react-icons/io";
 import { LuBellDot } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
+import { Link, useNavigate } from 'react-router-dom';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -18,6 +19,12 @@ function classNames(...classes) {
 }
 
 export default function TopBar() {
+  const navigate = useNavigate();
+  function handleLogout() {
+    console.log('Logging out...');
+    localStorage.removeItem('token');
+    navigate('/auth/login/')
+  }
   return (
     <Disclosure as="nav" className="bg-white"> 
       {({ open }) => (
@@ -74,11 +81,12 @@ export default function TopBar() {
                 </div>
               </div>
               <div className="absolute space-x-6 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
+              <Link to="/new/product/"><button
                   className="flex relative rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   <IoMdAdd className="mr-1" /> Create
-              </button>
+              </button></Link>
+              
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -135,6 +143,7 @@ export default function TopBar() {
                         {({ active }) => (
                           <a
                             href="#"
+                            onClick={handleLogout}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
