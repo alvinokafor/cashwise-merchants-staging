@@ -2,10 +2,23 @@ import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate // Add this import statement
+  Navigate, // Add this import statement
 } from "react-router-dom";
 
-import { Home, ProductDashboard, EarningDashboard, DraftTableDashboard, ReleasedTableDashboard, SignUpPage, OtpPage, NewProduct, ResetPage, LoginPage,StoreProduct,StoreDetails } from "@/pages";
+import {
+  Home,
+  ProductDashboard,
+  EarningDashboard,
+  DraftTableDashboard,
+  ReleasedTableDashboard,
+  SignUpPage,
+  OtpPage,
+  NewProduct,
+  ResetPage,
+  LoginPage,
+  StoreProduct,
+  StoreDetails,
+} from "@/pages";
 
 // const isAuthenticated = () => {
 //   // Implement your logic to check if the user is authenticated
@@ -40,7 +53,6 @@ const router = createBrowserRouter(
       <Route path="/all/store/" element={<StoreProduct />} />
       <Route path="/store/detail/:id" element={<StoreDetails />} />
 
-
       {/* <Route path="/auth/signup/" element={<SignUpPage />} />
       <Route path="/auth/login/" element={<LoginPage />} />
       <Route path="/auth/otp/" element={<OtpPage />} />
@@ -52,7 +64,6 @@ const router = createBrowserRouter(
       <ProtectedRoute path="/income/earning" element={<EarningDashboard />} />
       <ProtectedRoute path="/product/draft" element={<DraftTableDashboard />} />
       <ProtectedRoute path="/product/released" element={<ReleasedTableDashboard />} /> */}
-
 
       {/* 404 Page */}
       <Route path="*" element={<h1>Not Found</h1>} />
