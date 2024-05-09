@@ -1,13 +1,18 @@
-import React, { useState, useRef } from 'react';
-import { FaEnvelope } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
-import { IoMdFlag } from 'react-icons/io';
-import { BsShopWindow } from 'react-icons/bs';
-import landing from '../../assets/background/landing.jpg';
-import logo from '../../assets/Logo.png';
-import { signUpUser, loginUser, verifyOTP, resetPassword } from '../../config/api'; // Import Axios functions
-import { ToastContainer } from 'react-toastify';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from "react";
+import { FaEnvelope } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { IoMdFlag } from "react-icons/io";
+import { BsShopWindow } from "react-icons/bs";
+import landing from "../../assets/background/landing.jpg";
+import logo from "../../assets/Logo.png";
+import {
+  signUpUser,
+  loginUser,
+  verifyOTP,
+  resetPassword,
+} from "../../config/api"; // Import Axios functions
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface AuthPageProps {
   type: string;
@@ -18,7 +23,7 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   // Function to navigate to the login page relative to the current location
   const navigateToLogin = () => {
@@ -26,17 +31,24 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
   };
 
   // State to toggle password visibility
-  const [email, setEmail] = useState<string>('');
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [businessName, setBusinessName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [businessName, setBusinessName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [emailValue, setEmailValue] = useState<string>('info@gmail.com');
+  const [_emailValue, setEmailValue] = useState<string>("info@gmail.com");
 
   // State for OTP inputs
-  const [otpInputs, setOtpInputs] = useState<string[]>(['', '', '', '', '', '']);
+  const [otpInputs, setOtpInputs] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   // Ref for focusing the next OTP input
   const otpInputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -60,9 +72,9 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
   // Function to get the appropriate flag icon based on country code
   const getFlagIcon = (countryCode: string): JSX.Element => {
     switch (countryCode) {
-      case 'usa':
-      case 'uk':
-      case 'nigeria':
+      case "usa":
+      case "uk":
+      case "nigeria":
         return <IoMdFlag />;
       default:
         return <IoMdFlag />; // Default to a flag icon
@@ -73,22 +85,22 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
   const handleSubmit = async () => {
     try {
       // Call API function based on the form type
-      if (type === 'signup') {
+      if (type === "signup") {
         const userData = { email, firstName, lastName, businessName, password };
         await signUpUser(userData, navigate);
-      } else if (type === 'login') {
+      } else if (type === "login") {
         const userData = { email, password };
         await loginUser(userData, navigate);
-      } else if (type === 'resetPassword') {
+      } else if (type === "resetPassword") {
         const userData = { email };
         await resetPassword(userData.email);
-      } else if (type === 'otp') {
-        const otp = otpInputs.join('');
-        const emailValue = localStorage.getItem('email');
+      } else if (type === "otp") {
+        const otp = otpInputs.join("");
+        const emailValue = localStorage.getItem("email");
         if (emailValue) {
           setEmailValue(emailValue);
         }
-        const email = emailValue || '';
+        const email = emailValue || "";
         const otpData = { email, otp };
         await verifyOTP(otpData, navigate);
       }
@@ -100,24 +112,26 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
   };
 
   // Reusable input component
-  const Input: React.FC<{ type: string; placeholder: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; otpIndex?: number }> = ({
-    type,
-    placeholder,
-    value,
-    onChange,
-    otpIndex,
-  }) => {
-    if (type === 'otp') {
+  const Input: React.FC<{
+    type: string;
+    placeholder: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    otpIndex?: number;
+  }> = ({ type, placeholder, value, onChange, otpIndex }) => {
+    if (type === "otp") {
       return (
         <input
-          ref={(el) => (otpInputRefs.current[otpIndex!] = el as HTMLInputElement)}
+          ref={(el) =>
+            (otpInputRefs.current[otpIndex!] = el as HTMLInputElement)
+          }
           // ref={(el) => (otpInputRefs.current[otpIndex!] = el)}
           type="text"
           maxLength={1}
           value={otpInputs[otpIndex!]}
           onChange={(e) => handleOtpInputChange(otpIndex!, e.target.value)}
           className="bg-gray-100 placeholder-gray-400 focus:outline-none w-12 h-12 text-center mx-2 my-2 rounded-lg"
-          style={{ padding: '0.5rem' }}
+          style={{ padding: "0.5rem" }}
         />
       );
     }
@@ -138,30 +152,51 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
 
   // Conditional rendering based on the page type
   let formFields;
-  if (type === 'login') {
+  if (type === "login") {
     formFields = (
       <>
-        <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <div className="bg-gray-100 flex items-center border border-gray-100 rounded-lg px-4 py-2 mb-2">
           <FaEnvelope className="mr-2" />
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="bg-gray-100 placeholder-gray-400 focus:outline-none w-full"
           />
-          <button onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</button>
+          <button onClick={togglePasswordVisibility}>
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
       </>
     );
-  } else if (type === 'resetPassword') {
-    formFields = <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />;
-  } else if (type === 'otp') {
+  } else if (type === "resetPassword") {
+    formFields = (
+      <Input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+    );
+  } else if (type === "otp") {
     formFields = (
       <div className="flex items-center justify-center">
         {otpInputs.map((otp, index) => (
-          <Input key={index} type="otp" otpIndex={index} placeholder="OTP" value={otp} onChange={(e) => handleOtpInputChange(index, e.target.value)} />
+          <Input
+            key={index}
+            type="otp"
+            otpIndex={index}
+            placeholder="OTP"
+            value={otp}
+            onChange={(e) => handleOtpInputChange(index, e.target.value)}
+          />
         ))}
       </div>
     );
@@ -170,7 +205,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
     formFields = (
       <>
         <div className="bg-gray-100 flex items-center border border-gray-100 rounded-lg px-4 py-2 mb-2">
-          {getFlagIcon('usa')}
+          {getFlagIcon("usa")}
           <input
             type="tel"
             placeholder="Phone Number"
@@ -179,20 +214,42 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
             className="bg-gray-100 placeholder-gray-400 focus:outline-none w-full"
           />
         </div>
-        <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <Input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <Input type="text" placeholder="Business Name" value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Business Name"
+          value={businessName}
+          onChange={(e) => setBusinessName(e.target.value)}
+        />
         <div className="bg-gray-100 flex items-center border border-gray-100 rounded-lg px-4 py-2 mb-2">
           <FaEnvelope className="mr-2" />
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="bg-gray-100 placeholder-gray-400 focus:outline-none w-full"
           />
-          <button onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</button>
+          <button onClick={togglePasswordVisibility}>
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
       </>
     );
@@ -202,7 +259,10 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
     <div className="flex">
       {/* Left Div */}
       <ToastContainer />
-      <div className="hidden md:w-1/4 md:flex items-center justify-center fixed h-full" style={{ backgroundImage: `url(${landing})`, backgroundSize: 'cover' }}>
+      <div
+        className="hidden md:w-1/4 md:flex items-center justify-center fixed h-full"
+        style={{ backgroundImage: `url(${landing})`, backgroundSize: "cover" }}
+      >
         <div className="absolute top-0 left-0 m-4">
           <img src={`${logo}`} alt="Logo" className="w-8 h-8" />
         </div>
@@ -219,16 +279,27 @@ const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
 
           <button className="flex items-center justify-center rounded-xl bg-white border border-gray-300 w-[100%] px-4 py-2 mb-6">
             <FcGoogle size={25} className="mr-2" />
-            <span style={{ fontSize: 20, fontWeight: '400' }}>Google</span>
+            <span style={{ fontSize: 20, fontWeight: "400" }}>Google</span>
           </button>
           <hr className="w-[100%] border-gray-300 mb-8" />
           <p className="text-gray-600 mb-4">Or create with email address</p>
           <div className="flex flex-col mb-4">{formFields}</div>
-          <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 my-3 w-[100%] rounded-lg mb-4">
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 text-white px-4 py-2 my-3 w-[100%] rounded-lg mb-4"
+          >
             Submit
           </button>
           <p className="text-gray-600 text-sm">
-            By signing up, you agree to our <a href="#" className="underline">Privacy Policy</a> and <a href="#" className="underline">Terms of Service</a>.
+            By signing up, you agree to our{" "}
+            <a href="#" className="underline">
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a href="#" className="underline">
+              Terms of Service
+            </a>
+            .
           </p>
           <p className="text-gray-600 text-sm my-3" onClick={navigateToLogin}>
             {linkText}

@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { CiSearch,CiBoxList,CiEdit } from 'react-icons/ci';
-import {  FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useState } from "react";
+import { CiSearch, CiBoxList, CiEdit } from "react-icons/ci";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash  } from "react-icons/io";
+import {
+  IoIosMore,
+  IoIosSettings,
+  IoIosCopy,
+  IoIosTrash,
+} from "react-icons/io";
 import { IoGridOutline } from "react-icons/io5";
 
 const DraftTables = ({ data }: { data: any[] }) => {
@@ -13,7 +18,7 @@ const DraftTables = ({ data }: { data: any[] }) => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [_searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 5;
 
   // Pagination
@@ -34,7 +39,7 @@ const DraftTables = ({ data }: { data: any[] }) => {
     <div className="overflow-x-auto w-[100%] sm:w-full rounded-lg">
       {/* Search */}
       <div className="flex items-center justify-between mb-4 px-4 py-2">
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           {/* Empty badge with blue color */}
           <div className="bg-orange-400 rounded-full h-6 w-3 mr-2"></div>
 
@@ -43,7 +48,7 @@ const DraftTables = ({ data }: { data: any[] }) => {
 
           <div className="relative ml-3 rounded-md">
             <div className="absolute inset-y-0 left-0 flex items-center pl-1">
-              <CiSearch size={20}/>
+              <CiSearch size={20} />
             </div>
             <input
               type="text"
@@ -55,9 +60,9 @@ const DraftTables = ({ data }: { data: any[] }) => {
           </div>
         </div>
 
-        <div className='flex items-center justify-between'>
-        <CiBoxList size={25} />
-        <IoGridOutline size={25} />
+        <div className="flex items-center justify-between">
+          <CiBoxList size={25} />
+          <IoGridOutline size={25} />
         </div>
       </div>
 
@@ -67,46 +72,82 @@ const DraftTables = ({ data }: { data: any[] }) => {
           <tr>
             <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               <label className="inline-flex items-center">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded shadow-sm focus:ring-blue-400"/>
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-5 w-5 text-blue-500 rounded shadow-sm focus:ring-blue-400"
+                />
               </label>
             </th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Edithed</th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Product
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Price
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Last Edithed
+            </th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
-            <tr key={index} className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md">
+            <tr
+              key={index}
+              className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md"
+            >
               <td className="px-2 py-2 whitespace-nowrap">
                 <label className="inline-flex items-center">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded border-5 border-gray-100 shadow-sm focus:ring-blue-400" />
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5 text-blue-500 rounded border-5 border-gray-100 shadow-sm focus:ring-blue-400"
+                  />
                 </label>
               </td>
               <td className="px-1 py-2 whitespace-nowrap">
                 <div className="inline-flex items-center justify-between">
-                  <img src={item.image} alt="Product" className="h-16 w-17 rounded" />
-                  <div className='pl-3'>
-                    <div className="text-sm font-medium text-gray-900">{item.name}</div>
-                    <div className="text-sm font-light text-gray-500">{item.link}</div>
+                  <img
+                    src={item.image}
+                    alt="Product"
+                    className="h-16 w-17 rounded"
+                  />
+                  <div className="pl-3">
+                    <div className="text-sm font-medium text-gray-900">
+                      {item.name}
+                    </div>
+                    <div className="text-sm font-light text-gray-500">
+                      {item.link}
+                    </div>
                   </div>
                 </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${parseInt(item.price.replace('$', '').replace('.', ''), 10) > 100 ? 'bg-green-50 text-green-700 ring-green-600/10' : 'bg-gray-200 text-gray-600'}`}>
+                  <span
+                    className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${
+                      parseInt(
+                        item.price.replace("$", "").replace(".", ""),
+                        10
+                      ) > 100
+                        ? "bg-green-50 text-green-700 ring-green-600/10"
+                        : "bg-gray-200 text-gray-600"
+                    }`}
+                  >
                     {item.price}
-                    </span>
+                  </span>
                 </div>
-                </td>
+              </td>
 
               <td className="px-2 py-2 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{item.date}</div>
+                <div className="text-sm font-medium text-gray-900">
+                  {item.date}
+                </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="flex items-center justify-between ml-2 space-x-4">
-                  <div className='border rounded-full border-white'><CiEdit/></div>
-                  <TfiCommentAlt/>
+                  <div className="border rounded-full border-white">
+                    <CiEdit />
+                  </div>
+                  <TfiCommentAlt />
                   <div className="relative">
                     <button
                       onClick={() => toggleDropdown(index)}
@@ -119,7 +160,8 @@ const DraftTables = ({ data }: { data: any[] }) => {
                       <ul className="absolute right-0 z-10 mt-2 py-1 bg-white border border-gray-200 rounded-md shadow-lg">
                         <li>
                           <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                            <IoIosSettings className="mr-2" /> Edith title & discription
+                            <IoIosSettings className="mr-2" /> Edith title &
+                            discription
                           </button>
                         </li>
                         <li>

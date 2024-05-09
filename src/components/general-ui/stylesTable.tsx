@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash  } from "react-icons/io";
-import {FaChevronLeft, FaArrowDown, FaArrowUp, FaChevronRight } from 'react-icons/fa';
+import {
+  IoIosMore,
+  IoIosSettings,
+  IoIosCopy,
+  IoIosTrash,
+} from "react-icons/io";
+import {
+  FaChevronLeft,
+  FaArrowDown,
+  FaArrowUp,
+  FaChevronRight,
+} from "react-icons/fa";
 
 const StylesDataTables = ({ data }: { data: any }) => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
@@ -12,7 +22,7 @@ const StylesDataTables = ({ data }: { data: any }) => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [_searchTerm, _setSearchTerm] = useState("");
   const itemsPerPage = 5;
 
   // Pagination
@@ -24,40 +34,59 @@ const StylesDataTables = ({ data }: { data: any }) => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   // Handle search
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page when searching
-  };
+  // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchTerm(e.target.value);
+  //   setCurrentPage(1); // Reset to first page when searching
+  // };
 
   return (
     <div className="overflow-x-auto w-full sm:w-full rounded-lg">
-   
-
       {/* Table */}
       <table className="table-auto w-full divide-y divide-gray-200">
         <thead>
           <tr>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Earnings</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product sales count</th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Date
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Earnings
+            </th>
+            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Product sales count
+            </th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item: any, index: number) => (
-            <tr key={index} className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md">
-               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{item.date}</div>
+            <tr
+              key={index}
+              className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md"
+            >
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900">
+                  {item.date}
+                </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
-                  <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${item.status === 'Delivered' ? 'bg-green-50 text-green-700 ring-green-600/10' : 'bg-red-50 text-red-700 ring-red-600/10'}`}>
+                  <span
+                    className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${
+                      item.status === "Delivered"
+                        ? "bg-green-50 text-green-700 ring-green-600/10"
+                        : "bg-red-50 text-red-700 ring-red-600/10"
+                    }`}
+                  >
                     {item.status}
                   </span>
                 </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{item.earning}</div>
+                <div className="text-sm font-medium text-gray-900">
+                  {item.earning}
+                </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap flex items-center mt-[25px]">
                 <div className="text-sm font-medium text-gray-900">
@@ -67,7 +96,11 @@ const StylesDataTables = ({ data }: { data: any }) => {
                 </div>
                 <div className="ml-1">
                   {item.percentage && (
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${item.percentage > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                    <span
+                      className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
+                        item.percentage > 0 ? "text-green-700" : "text-red-700"
+                      }`}
+                    >
                       {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
                       {item.percentage}%
                     </span>
@@ -76,8 +109,10 @@ const StylesDataTables = ({ data }: { data: any }) => {
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="flex items-center justify-between ml-2 space-x-4">
-                  <div className='border rounded-full border-white'><CiEdit/></div>
-                  <TfiCommentAlt/>
+                  <div className="border rounded-full border-white">
+                    <CiEdit />
+                  </div>
+                  <TfiCommentAlt />
                   <div className="relative">
                     <button
                       onClick={() => toggleDropdown(index)}
@@ -90,7 +125,8 @@ const StylesDataTables = ({ data }: { data: any }) => {
                       <ul className="absolute right-0 z-10 mt-2 py-1 bg-white border border-gray-200 rounded-md shadow-lg">
                         <li>
                           <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                            <IoIosSettings className="mr-2" /> Edith title & discription
+                            <IoIosSettings className="mr-2" /> Edith title &
+                            discription
                           </button>
                         </li>
                         <li>

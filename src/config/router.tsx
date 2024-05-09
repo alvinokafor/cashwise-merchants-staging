@@ -2,7 +2,6 @@ import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate, // Add this import statement
 } from "react-router-dom";
 
 import {

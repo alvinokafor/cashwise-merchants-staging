@@ -1,7 +1,5 @@
 import { Heading } from "@radix-ui/themes";
 import { SEOWrapper, StoreDashLayout } from "@/layouts";
-import { useExampleQuery, ExampleAdapter } from "@/adapters/ExampleAdapter";
-import { queryKeys } from "@/lib/constants";
 
 const metaData = {
   title: "React Starter Project",
@@ -10,13 +8,6 @@ const metaData = {
 };
 
 export default function StoreDetails() {
-  //example of how to use the query adapter, this returns all the data from react query
-  const { data, isLoading, error, isError, ...rest } = useExampleQuery(
-    ExampleAdapter.exampleQueryApiCall1,
-    [queryKeys.EXAMPLE_KEY],
-    "" // pass in any params you may have
-  );
-
   return (
     <SEOWrapper metaData={metaData}>
       <StoreDashLayout>

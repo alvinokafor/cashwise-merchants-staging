@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { HiOutlineChevronDown } from 'react-icons/hi'; // Import the dropdown icon
+import { useState } from "react";
+import { HiOutlineChevronDown } from "react-icons/hi"; // Import the dropdown icon
 
 // const CustomDropdown = ({ options, onSelect }) => {
-const CustomDropdown = ({ options, onSelect }: { options: any[]; onSelect: (option: any) => void }) => {
+const CustomDropdown = ({
+  options,
+  onSelect,
+}: {
+  options: any[];
+  onSelect: (option: any) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState("");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -23,9 +29,11 @@ const CustomDropdown = ({ options, onSelect }: { options: any[]; onSelect: (opti
         className="flex items-center justify-between w-full p-2 border-2 border-gray-200 rounded-lg focus:border-blue-300 outline-none transition-colors duration-200 cursor-pointer"
         onClick={toggleDropdown}
       >
-        <div>{selectedOption || 'Select an item'}</div>
+        <div>{selectedOption || "Select an item"}</div>
         <div className="ml-2">
-          <HiOutlineChevronDown className={`text-gray-500 ${isOpen ? 'transform rotate-180' : ''}`} />
+          <HiOutlineChevronDown
+            className={`text-gray-500 ${isOpen ? "transform rotate-180" : ""}`}
+          />
         </div>
       </div>
       {isOpen && (

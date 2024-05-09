@@ -1,13 +1,37 @@
-import  { useState } from 'react';
-import { FaArrowDown } from 'react-icons/fa';
-import { FaArrowUp } from 'react-icons/fa6';
+import { useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa6";
 
 const DataTable = () => {
-  const [filter, setFilter] = useState('');
+  const [filter, _setFilter] = useState("");
   const data = [
-    { id: 1, date: '25 Sep - 1 Oct', productCount: 100, viewsCount: 2000, percentage: 800, like: 28, comment: 30 },
-    { id: 2, date: '30 Oct - 24 Dec', productCount: 150, viewsCount: 2500, percentage: 1, like: 28, comment: 30 },
-    { id: 3, date: '01 Jun - 20 Nov', productCount: 120, viewsCount: 2200, percentage: 7, like: 28, comment: 30 },
+    {
+      id: 1,
+      date: "25 Sep - 1 Oct",
+      productCount: 100,
+      viewsCount: 2000,
+      percentage: 800,
+      like: 28,
+      comment: 30,
+    },
+    {
+      id: 2,
+      date: "30 Oct - 24 Dec",
+      productCount: 150,
+      viewsCount: 2500,
+      percentage: 1,
+      like: 28,
+      comment: 30,
+    },
+    {
+      id: 3,
+      date: "01 Jun - 20 Nov",
+      productCount: 120,
+      viewsCount: 2200,
+      percentage: 7,
+      like: 28,
+      comment: 30,
+    },
     // Add more data here
   ];
 
@@ -63,7 +87,6 @@ const DataTable = () => {
             >
               Likes
             </th>
-           
           </tr>
         </thead>
         <tbody>
@@ -73,9 +96,10 @@ const DataTable = () => {
               className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md"
             >
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{item.date}</div>
+                <div className="text-sm font-medium text-gray-900">
+                  {item.date}
+                </div>
               </td>
-              
 
               <td className="px-6 py-4 whitespace-nowrap flex items-center">
                 <div className="text-sm font-medium text-gray-900">
@@ -85,33 +109,42 @@ const DataTable = () => {
                 </div>
                 <div className="ml-1">
                   {item.percentage && (
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${item.percentage > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                    <span
+                      className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
+                        item.percentage > 0 ? "text-green-700" : "text-red-700"
+                      }`}
+                    >
                       {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
                       {item.percentage}%
                     </span>
                   )}
                 </div>
               </td>
-          
 
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center justify-center">
-                <div className="text-sm font-medium text-gray-900">
+                  <div className="text-sm font-medium text-gray-900">
                     <span className="inline-flex items-center justify-center rounded-md bg-lightpurple px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                    ${item.viewsCount}
-                  </span>
-                </div>
-                <div className="ml-1">
-                  {item.percentage && (
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${item.percentage > 0 ? 'text-green-700' : 'text-red-700'}`}>
-                      {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
-                      {item.percentage}%
+                      ${item.viewsCount}
                     </span>
-                  )}
-                </div>
+                  </div>
+                  <div className="ml-1">
+                    {item.percentage && (
+                      <span
+                        className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
+                          item.percentage > 0
+                            ? "text-green-700"
+                            : "text-red-700"
+                        }`}
+                      >
+                        {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
+                        {item.percentage}%
+                      </span>
+                    )}
+                  </div>
                 </div>
               </td>
-             
+
               <td className="px-6 py-4 whitespace-nowrap flex items-center">
                 <div className="text-sm font-medium text-gray-900">
                   <span className="inline-flex items-center justify-center rounded-md bg-lightyellow px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
@@ -120,15 +153,17 @@ const DataTable = () => {
                 </div>
                 <div className="ml-1">
                   {item.percentage && (
-                    <span className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${item.percentage > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                    <span
+                      className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
+                        item.percentage > 0 ? "text-green-700" : "text-red-700"
+                      }`}
+                    >
                       {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
                       {item.percentage}%
                     </span>
                   )}
                 </div>
               </td>
-
-              
             </tr>
           ))}
         </tbody>

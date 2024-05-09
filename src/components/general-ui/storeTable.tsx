@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
-import { CiSearch, CiEdit } from 'react-icons/ci';
-import { FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
-import { TfiCommentAlt } from 'react-icons/tfi';
-import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash, IoMdAdd } from 'react-icons/io';
+import React, { useState } from "react";
+import { CiSearch, CiEdit } from "react-icons/ci";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaArrowDown,
+  FaArrowUp,
+} from "react-icons/fa";
+import { TfiCommentAlt } from "react-icons/tfi";
+import {
+  IoIosMore,
+  IoIosSettings,
+  IoIosCopy,
+  IoIosTrash,
+  IoMdAdd,
+} from "react-icons/io";
 // import { IoGridOutline } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 const StoreTables = ({ data }: { data: any }) => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const toggleDropdown = (index:number) => {
+  const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [_searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 5;
 
   // Pagination
@@ -24,7 +35,7 @@ const StoreTables = ({ data }: { data: any }) => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   // Handle page change
-  const paginate = (pageNumber:number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   // Handle search
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +45,7 @@ const StoreTables = ({ data }: { data: any }) => {
 
   const handleRowClick = (id: number) => {
     navigate(`/store/detail/${id}`);
-};
+  };
 
   return (
     <div className="overflow-x-auto w-[100%] sm:w-full rounded-lg">
@@ -83,16 +94,28 @@ const StoreTables = ({ data }: { data: any }) => {
                 />
               </label>
             </th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sales</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Product
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Price
+            </th>
+            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Sales
+            </th>
+            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Location
+            </th>
+            <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((item:any, index:number) => (
+          {currentItems.map((item: any, index: number) => (
             <tr
               key={index}
               className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md cursor-pointer"
@@ -105,12 +128,23 @@ const StoreTables = ({ data }: { data: any }) => {
                   />
                 </label>
               </td>
-              <td className="px-1 py-2 whitespace-nowrap" onClick={() => handleRowClick(item.id)}> 
+              <td
+                className="px-1 py-2 whitespace-nowrap"
+                onClick={() => handleRowClick(item.id)}
+              >
                 <div className="inline-flex items-center justify-between">
-                  <img src={item.image} alt="Product" className="h-16 w-17 rounded" />
+                  <img
+                    src={item.image}
+                    alt="Product"
+                    className="h-16 w-17 rounded"
+                  />
                   <div className="pl-3">
-                    <div className="text-sm font-medium text-blue-900">{item.name}</div>
-                    <div className="text-sm font-light text-gray-500">{item.category}</div>
+                    <div className="text-sm font-medium text-blue-900">
+                      {item.name}
+                    </div>
+                    <div className="text-sm font-light text-gray-500">
+                      {item.category}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -118,7 +152,9 @@ const StoreTables = ({ data }: { data: any }) => {
                 <div className="text-sm font-medium text-gray-900">
                   <span
                     className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ring-1 ring-inset ${
-                      item.status === 'Active' ? 'bg-green-50 text-green-700 ring-green-600/10' : 'bg-red-50 text-red-700 ring-red-600/10'
+                      item.status === "Active"
+                        ? "bg-green-50 text-green-700 ring-green-600/10"
+                        : "bg-red-50 text-red-700 ring-red-600/10"
                     }`}
                   >
                     {item.status}
@@ -126,7 +162,9 @@ const StoreTables = ({ data }: { data: any }) => {
                 </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{item.price}</div>
+                <div className="text-sm font-medium text-gray-900">
+                  {item.price}
+                </div>
               </td>
               <td className="px-2 py-2 whitespace-nowrap flex items-center mt-[25px]">
                 <div className="text-sm font-medium text-gray-900">
@@ -138,7 +176,7 @@ const StoreTables = ({ data }: { data: any }) => {
                   {item.percentage && (
                     <span
                       className={`inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-bold ${
-                        item.percentage > 0 ? 'text-green-700' : 'text-red-700'
+                        item.percentage > 0 ? "text-green-700" : "text-red-700"
                       }`}
                     >
                       {item.percentage > 0 ? <FaArrowUp /> : <FaArrowDown />}
@@ -150,9 +188,7 @@ const StoreTables = ({ data }: { data: any }) => {
               <td className="px-2 py-2 whitespace-nowrap">
                 <div className="flex items-center justify-center">
                   <div className="text-sm font-medium text-gray-900">
-                    <span
-                      className="inline-flex items-center justify-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
-                    >
+                    <span className="inline-flex items-center justify-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                       {item.views}
                     </span>
                   </div>
@@ -179,7 +215,8 @@ const StoreTables = ({ data }: { data: any }) => {
                       <ul className="absolute right-0 z-10 mt-2 py-1 bg-white border border-gray-200 rounded-md shadow-lg">
                         <li>
                           <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                            <IoIosSettings className="mr-2" /> Edit title & description
+                            <IoIosSettings className="mr-2" /> Edit title &
+                            description
                           </button>
                         </li>
                         <li>
