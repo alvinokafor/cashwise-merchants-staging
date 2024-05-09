@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { CiSearch,CiBoxList,CiEdit } from 'react-icons/ci';
-import { FaSearch, FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { TfiCommentAlt } from "react-icons/tfi";
 import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash  } from "react-icons/io";
 import { IoGridOutline } from "react-icons/io5";
 
-const ReleasedTables = ({ data }) => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+const ReleasedTables = ({ data }: { data: any }) => {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
-  const toggleDropdown = (index) => {
+  const toggleDropdown = (index:number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
@@ -22,10 +22,10 @@ const ReleasedTables = ({ data }) => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   // Handle page change
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber:number) => setCurrentPage(pageNumber);
 
   // Handle search
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1); // Reset to first page when searching
   };
@@ -79,7 +79,7 @@ const ReleasedTables = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((item, index) => (
+          {currentItems.map((item:any, index:number) => (
             <tr key={index} className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md">
               <td className="px-2 py-2 whitespace-nowrap">
                 <label className="inline-flex items-center">

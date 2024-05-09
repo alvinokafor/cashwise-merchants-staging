@@ -1,7 +1,7 @@
-import { Box } from "@radix-ui/themes";
+// import { Box } from "@radix-ui/themes";
 import { useState } from "react";
-import { BsArrowLeftShort, BsChevronDown, BsFileImageFill, BsPerson, BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
-import { AiFillEnvironment, AiOutlineBarChart, AiOutlineFileText, AiOutlineLogout, AiOutlineMail, AiOutlineSetting } from "react-icons/ai";
+import { BsArrowLeftShort, BsChevronDown } from "react-icons/bs";
+import { AiFillEnvironment, AiOutlineBarChart, AiOutlineMail } from "react-icons/ai";
 import {RiDashboardFill} from "react-icons/ri";
 import { MdAddHomeWork,MdProductionQuantityLimits } from "react-icons/md";
 import { LiaUsersSolid } from "react-icons/lia";
@@ -66,12 +66,13 @@ export default function NavBar() {
         <ul className="p-2">
           {Menus.map((menu, index) => (
             <>
-            <li key={index} className={`text-gray-500 text-sm flex items-center gap-x-4 cursor-pointer pt-2 pb-2 hover:bg-gray-300 rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
+            <li key={index} className={`text-gray-500 text-sm flex items-center gap-x-4 cursor-pointer pt-2 pb-2 hover:bg-gray-300 rounded-md ${('spacing' in menu && menu.spacing) ? "mt-9" : "mt-2"}`}>
               <span className="text-2xl block float-left">
                 {menu.icon ? menu.icon : <RiDashboardFill/>}
               </span>
               <span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>
-              <Link to={menu.link}>{menu.title}</Link>
+              {/* <Link to={menu.link}>{menu.title}</Link> */}
+              <Link to={menu.link || '/default-path'}>{menu.title}</Link>
               </span>
               {menu.submenu && open && (
                 <BsChevronDown className={`${submenuOpen && "rotate-180"}`}

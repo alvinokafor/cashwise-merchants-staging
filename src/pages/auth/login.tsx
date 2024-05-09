@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import AuthPage from '../../components/Auth-form/form';
 
 const LoginPage = () => {

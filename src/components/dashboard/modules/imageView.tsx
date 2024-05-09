@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { AiOutlineFullscreen } from 'react-icons/ai';
 
-const ImageView = ({ imageUrl }) => {
+// const ImageView = ({ imageUrl }) => {
+const ImageView = ({ imageUrl }: { imageUrl: string }) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
 
     const toggleFullScreen = () => {

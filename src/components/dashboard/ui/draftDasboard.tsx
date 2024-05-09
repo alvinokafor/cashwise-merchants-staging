@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+// import React,{useState} from 'react';
 import Card from '@/components/general-ui/card';
-import LineCharts from "@/components/dashboard/modules/Linechart";
-import ToggleSwitchCard from '../modules/toggleSwitch';
+// import LineCharts from "@/components/dashboard/modules/Linechart";
+// import ToggleSwitchCard from '../modules/toggleSwitch';
 
-import BarChart from '../modules/BarChart';
-import HeaderFilter from '@/components/general-ui/filterBar';
-import PopularItem from './PopularItem';
-import CardList from '../modules/CardList';
-import DataTable from '@/components/general-ui/table';
-import DataTables from '@/components/general-ui/largTable';
+// import BarChart from '../modules/BarChart';
+// import HeaderFilter from '@/components/general-ui/filterBar';
+// import PopularItem from './PopularItem';
+// import CardList from '../modules/CardList';
+// import DataTable from '@/components/general-ui/table';
+// import DataTables from '@/components/general-ui/largTable';
 import DraftTables from '@/components/general-ui/DraftTable';
 
 
@@ -87,11 +87,11 @@ export default function DraftDashboard() {
       ];
       
       
-  const [activeIndex, setActiveIndex] = useState(0); 
+  // const [activeIndex, setActiveIndex] = useState(0); 
 
-  const handleToggle = (index: React.SetStateAction<number>) => {
-    setActiveIndex(index);
-  };
+  // const handleToggle = (index: React.SetStateAction<number>) => {
+  //   setActiveIndex(index);
+  // };
   return (
     <div className='container flex flex-wrap justify-between p-6'>
       {/* grid on card */}

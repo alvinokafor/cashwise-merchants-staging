@@ -15,7 +15,8 @@ ChartJs.register(
     PointElement
 );
 
-const Card = ({ bgColor, title, amount, data }) => {
+// const Card = ({ bgColor, title, amount, data }) => {
+const Card = ({ bgColor, title, amount, data }: { bgColor: string; title: string; amount: number; data: any[] }) => {
     const generateData = () => {
         const labels = [];
         const datas = [];
@@ -127,9 +128,9 @@ const Card = ({ bgColor, title, amount, data }) => {
 const CardList = () => {
   return (
     <div className="flex justify-between gap-4">
-      <Card bgColor="#eaf6ef" title="Card 1" amount="250k" data={[10, 20, 30, 40, 50]} />
-      <Card bgColor="#e9f6fc" title="Card 2" amount="510" data={[20, 30, 40, 50, 60]} />
-      <Card bgColor="#f0ecfd" title="Card 3" amount="50k" data={[30, 40, 50, 60, 70]} />
+      <Card bgColor="#eaf6ef" title="Card 1" amount={250000} data={[10, 20, 30, 40, 50]} />
+      <Card bgColor="#e9f6fc" title="Card 2" amount={510} data={[20, 30, 40, 50, 60]} />
+      <Card bgColor="#f0ecfd" title="Card 3" amount={50000} data={[30, 40, 50, 60, 70]} />
     </div>
   );
 };

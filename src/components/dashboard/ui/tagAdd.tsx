@@ -2,28 +2,28 @@ import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 const TagInput = () => {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
   };
 
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter' && inputValue) {
-      addTag(inputValue.trim());
-      setInputValue('');
-    }
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter' && inputValue) {
+        addTag(inputValue.trim());
+        setInputValue('');
+      }
   };
 
-  const addTag = (tag) => {
+  const addTag = (tag: string) => {
     if (tags.length < 10 && !tags.includes(tag)) {
       setTags([...tags, tag]);
     }
   };
 
-  const removeTag = (tag) => {
-    setTags(tags.filter((t) => t !== tag));
+  const removeTag = (tag: string) => {
+      setTags(tags.filter((t: string) => t !== tag));
   };
 
   return (

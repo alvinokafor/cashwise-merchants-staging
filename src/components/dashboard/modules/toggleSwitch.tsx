@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { FaArrowDown,FaCartFlatbedSuitcase } from "react-icons/fa6";
 import { BsInfoCircleFill } from "react-icons/bs";
 
-const ToggleSwitchCard = ({ activeIndex, handleToggle }) => {
+// const ToggleSwitchCard = ({ activeIndex, handleToggle }) => {
+    const ToggleSwitchCard = ({ activeIndex, handleToggle }: { activeIndex: number; handleToggle: (index: number) => void }) => {
 
     return (
       <div className="bg-gray-100 rounded-lg p-2 mb-8 ml-6 flex justify-between">

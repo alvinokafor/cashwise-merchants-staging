@@ -1,35 +1,44 @@
 import React, { useState, useRef } from 'react';
 import { FaEnvelope } from 'react-icons/fa';
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle } from 'react-icons/fc';
 import { IoMdFlag } from 'react-icons/io';
-import { BsShopWindow } from "react-icons/bs";
+import { BsShopWindow } from 'react-icons/bs';
 import landing from '../../assets/background/landing.jpg';
 import logo from '../../assets/Logo.png';
 import { signUpUser, loginUser, verifyOTP, resetPassword } from '../../config/api'; // Import Axios functions
 import { ToastContainer } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const AuthPage = ({ type, title, linkText, link }) => {
- const navigate = useNavigate();
- const location = useLocation();
+interface AuthPageProps {
+  type: string;
+  title: string;
+  linkText: string;
+  link: string;
+}
 
- // Function to navigate to the login page relative to the current location
- const navigateToLogin = () => {
-   navigate(`${link}`);
- };
+const AuthPage: React.FC<AuthPageProps> = ({ type, title, linkText, link }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Function to navigate to the login page relative to the current location
+  const navigateToLogin = () => {
+    navigate(`${link}`);
+  };
+
   // State to toggle password visibility
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [businessName, setBusinessname] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [emailvalue, setEmailValue] = useState('info@gmail.com');
+  const [email, setEmail] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [businessName, setBusinessName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [emailValue, setEmailValue] = useState<string>('info@gmail.com');
+
   // State for OTP inputs
-  const [otpInputs, setOtpInputs] = useState(['', '', '', '', '', '']);
+  const [otpInputs, setOtpInputs] = useState<string[]>(['', '', '', '', '', '']);
   // Ref for focusing the next OTP input
-  const otpInputRefs = useRef([]);
+  const otpInputRefs = useRef<HTMLInputElement[]>([]);
 
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
@@ -37,7 +46,7 @@ const AuthPage = ({ type, title, linkText, link }) => {
   };
 
   // Function to handle OTP input change
-  const handleOtpInputChange = (index, value) => {
+  const handleOtpInputChange = (index: number, value: string) => {
     const newOtpInputs = [...otpInputs];
     newOtpInputs[index] = value;
     setOtpInputs(newOtpInputs);
@@ -49,7 +58,7 @@ const AuthPage = ({ type, title, linkText, link }) => {
   };
 
   // Function to get the appropriate flag icon based on country code
-  const getFlagIcon = (countryCode) => {
+  const getFlagIcon = (countryCode: string): JSX.Element => {
     switch (countryCode) {
       case 'usa':
       case 'uk':
@@ -60,53 +69,59 @@ const AuthPage = ({ type, title, linkText, link }) => {
     }
   };
 
-// Function to handle form submission
-const handleSubmit = async () => {
+  // Function to handle form submission
+  const handleSubmit = async () => {
     try {
       // Call API function based on the form type
       if (type === 'signup') {
         const userData = { email, firstName, lastName, businessName, password };
-        await signUpUser(userData,navigate);
+        await signUpUser(userData, navigate);
       } else if (type === 'login') {
         const userData = { email, password };
-        await loginUser(userData,navigate);
+        await loginUser(userData, navigate);
       } else if (type === 'resetPassword') {
         const userData = { email };
         await resetPassword(userData.email);
       } else if (type === 'otp') {
-        const otp = otpInputs.join('')
+        const otp = otpInputs.join('');
         const emailValue = localStorage.getItem('email');
         if (emailValue) {
           setEmailValue(emailValue);
-        } 
-        const email = emailvalue
+        }
+        const email = emailValue || '';
         const otpData = { email, otp };
-        await verifyOTP(otpData,navigate);
+        await verifyOTP(otpData, navigate);
       }
-  
+
       // Handle success response
     } catch (error) {
       // Handle error response
     }
   };
-  
 
   // Reusable input component
-  const Input = ({ type, placeholder, value, onChange, otpIndex }) => {
+  const Input: React.FC<{ type: string; placeholder: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; otpIndex?: number }> = ({
+    type,
+    placeholder,
+    value,
+    onChange,
+    otpIndex,
+  }) => {
     if (type === 'otp') {
       return (
         <input
-          ref={el => (otpInputRefs.current[otpIndex] = el)}
+          ref={(el) => (otpInputRefs.current[otpIndex!] = el as HTMLInputElement)}
+          // ref={(el) => (otpInputRefs.current[otpIndex!] = el)}
           type="text"
           maxLength={1}
-          value={otpInputs[otpIndex]}
-          onChange={(e) => handleOtpInputChange(otpIndex, e.target.value)}
+          value={otpInputs[otpIndex!]}
+          onChange={(e) => handleOtpInputChange(otpIndex!, e.target.value)}
           className="bg-gray-100 placeholder-gray-400 focus:outline-none w-12 h-12 text-center mx-2 my-2 rounded-lg"
-          style={{padding: '0.5rem'}}
+          style={{ padding: '0.5rem' }}
         />
       );
     }
-  
+
     return (
       <div className="flex items-center border bg-gray-100 border-gray-100 rounded-lg px-4 py-2 mb-2">
         <BsShopWindow className="mr-2" />
@@ -130,27 +145,23 @@ const handleSubmit = async () => {
         <div className="bg-gray-100 flex items-center border border-gray-100 rounded-lg px-4 py-2 mb-2">
           <FaEnvelope className="mr-2" />
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="bg-gray-100 placeholder-gray-400 focus:outline-none w-full"
           />
-          <button onClick={togglePasswordVisibility}>
-            {showPassword ? "Hide" : "Show"}
-          </button>
+          <button onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</button>
         </div>
       </>
     );
   } else if (type === 'resetPassword') {
-    formFields = (
-      <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    );
+    formFields = <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />;
   } else if (type === 'otp') {
     formFields = (
       <div className="flex items-center justify-center">
         {otpInputs.map((otp, index) => (
-          <Input key={index} type="otp" otpIndex={index} />
+          <Input key={index} type="otp" otpIndex={index} placeholder="OTP" value={otp} onChange={(e) => handleOtpInputChange(index, e.target.value)} />
         ))}
       </div>
     );
@@ -171,19 +182,17 @@ const handleSubmit = async () => {
         <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <Input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
         <Input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <Input type="text" placeholder="Business Name" value={businessName} onChange={(e) => setBusinessname(e.target.value)} />
+        <Input type="text" placeholder="Business Name" value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
         <div className="bg-gray-100 flex items-center border border-gray-100 rounded-lg px-4 py-2 mb-2">
           <FaEnvelope className="mr-2" />
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="bg-gray-100 placeholder-gray-400 focus:outline-none w-full"
           />
-          <button onClick={togglePasswordVisibility}>
-            {showPassword ? "Hide" : "Show"}
-          </button>
+          <button onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</button>
         </div>
       </>
     );
@@ -193,10 +202,7 @@ const handleSubmit = async () => {
     <div className="flex">
       {/* Left Div */}
       <ToastContainer />
-      <div 
-        className="hidden md:w-1/4 md:flex items-center justify-center fixed h-full "
-        style={{ backgroundImage: `url(${landing})`, backgroundSize: 'cover' }}
-      >
+      <div className="hidden md:w-1/4 md:flex items-center justify-center fixed h-full" style={{ backgroundImage: `url(${landing})`, backgroundSize: 'cover' }}>
         <div className="absolute top-0 left-0 m-4">
           <img src={`${logo}`} alt="Logo" className="w-8 h-8" />
         </div>
@@ -210,23 +216,23 @@ const handleSubmit = async () => {
         <div className="text-center mt-5 md:w-[40%] relative">
           <h2 className="text-3xl font-bold mb-4">{title}</h2>
           <p className="text-gray-600 mb-8">Sign up with social account</p>
-    
+
           <button className="flex items-center justify-center rounded-xl bg-white border border-gray-300 w-[100%] px-4 py-2 mb-6">
             <FcGoogle size={25} className="mr-2" />
-            <span style={{fontSize:20,fontWeight:"400"}}>Google</span>
+            <span style={{ fontSize: 20, fontWeight: '400' }}>Google</span>
           </button>
           <hr className="w-[100%] border-gray-300 mb-8" />
           <p className="text-gray-600 mb-4">Or create with email address</p>
-          <div className="flex flex-col mb-4">
-            {formFields}
-          </div>
-          <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 my-3 w-[100%] rounded-lg mb-4">Submit</button>
+          <div className="flex flex-col mb-4">{formFields}</div>
+          <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 my-3 w-[100%] rounded-lg mb-4">
+            Submit
+          </button>
           <p className="text-gray-600 text-sm">
             By signing up, you agree to our <a href="#" className="underline">Privacy Policy</a> and <a href="#" className="underline">Terms of Service</a>.
           </p>
           <p className="text-gray-600 text-sm my-3" onClick={navigateToLogin}>
-              {linkText}
-        </p>
+            {linkText}
+          </p>
         </div>
       </div>
     </div>

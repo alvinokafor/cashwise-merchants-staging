@@ -126,11 +126,11 @@ export default function StoreDashboard() {
       
       
       
-  const [activeIndex, setActiveIndex] = useState(0); 
+  // const [activeIndex, setActiveIndex] = useState(0); 
 
-  const handleToggle = (index: React.SetStateAction<number>) => {
-    setActiveIndex(index);
-  };
+  // const handleToggle = (index: React.SetStateAction<number>) => {
+  //   setActiveIndex(index);
+  // };
   return (
     <div className='container flex flex-wrap justify-between p-6'>
       {/* grid on card */}

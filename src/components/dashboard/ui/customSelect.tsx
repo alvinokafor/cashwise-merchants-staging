@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { HiOutlineChevronDown } from 'react-icons/hi'; // Import the dropdown icon
 
-const CustomDropdown = ({ options, onSelect }) => {
+// const CustomDropdown = ({ options, onSelect }) => {
+const CustomDropdown = ({ options, onSelect }: { options: any[]; onSelect: (option: any) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -9,7 +10,8 @@ const CustomDropdown = ({ options, onSelect }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (option) => {
+  // const handleOptionClick = (option) => {
+  const handleOptionClick = (option: any) => {
     setSelectedOption(option);
     onSelect(option);
     setIsOpen(false);

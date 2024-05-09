@@ -20,30 +20,36 @@ export default function NewProd() {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 	const [amount, setAmount] = useState('');
 
-  const handleAmountChange = (event) => {
+  // const handleAmountChange = (event) => {
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // Allow only numbers and one decimal point
     if (/^\d*\.?\d*$/.test(value)) {
       setAmount(value);
     }
   };
-  const handleTitleChange = (e) => {
+  // const handleTitleChange = (e) => {
+  //   setTitle(e.target.value);
+  // };
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
+  
 
-  const handleDescriptionChange = (value) => {
+  const handleDescriptionChange = (value: string) => {
     setDescription(value);
   };
 
-  const handleTooltipVisibility = (isVisible) => {
+  const handleTooltipVisibility = (isVisible: boolean) => {
     setTooltipVisible(isVisible);
   };
 
-  const [activeIndex, setActiveIndex] = useState(0); 
 
-  const handleToggle = (index: React.SetStateAction<number>) => {
-    setActiveIndex(index);
-  };
+  // const [activeIndex, setActiveIndex] = useState(0); 
+
+  // const handleToggle = (index: React.SetStateAction<number>) => {
+  //   setActiveIndex(index);
+  // };
   return (
 		<div className='container flex flex-wrap justify-between p-6'>
 		 <Card className="w-full sm:w-[62%] mb-4 mr-2">

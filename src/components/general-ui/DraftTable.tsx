@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CiSearch,CiBoxList,CiEdit } from 'react-icons/ci';
-import { FaSearch, FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import {  FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { TfiCommentAlt } from "react-icons/tfi";
 import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash  } from "react-icons/io";
 import { IoGridOutline } from "react-icons/io5";
 
-const DraftTables = ({ data }) => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+const DraftTables = ({ data }: { data: any[] }) => {
+  const [openDropdown, setOpenDropdown] = useState<null | number>(null);
 
-  const toggleDropdown = (index) => {
+  const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
@@ -22,10 +22,10 @@ const DraftTables = ({ data }) => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   // Handle page change
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   // Handle search
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1); // Reset to first page when searching
   };

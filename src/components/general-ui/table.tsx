@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import { FaArrowUp } from 'react-icons/fa6';
 
@@ -15,9 +15,9 @@ const DataTable = () => {
     item.date.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
-  };
+  // const handleFilterChange = (e) => {
+  //   setFilter(e.target.value);
+  // };
 
   return (
     <div className="overflow-x-auto w-[100%] sm:w-[100%] rounded-lg">

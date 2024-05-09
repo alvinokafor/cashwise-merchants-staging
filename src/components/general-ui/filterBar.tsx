@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react'
 import { IoChevronDown } from "react-icons/io5";
 
-const HeaderFilter = ({title, color}) => {
+const HeaderFilter = ({ title, color }: { title: string; color: string }) => {
 
-  function classNames(...classes) {
+  function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
   }
   return (

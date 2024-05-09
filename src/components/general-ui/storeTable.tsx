@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { CiSearch, CiEdit } from 'react-icons/ci';
-import { FaSearch, FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { IoIosMore, IoIosSettings, IoIosCopy, IoIosTrash, IoMdAdd } from 'react-icons/io';
-import { IoGridOutline } from 'react-icons/io5';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+// import { IoGridOutline } from 'react-icons/io5';
+import { Link, useNavigate } from 'react-router-dom';
 
-const StoreTables = ({ data }) => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+const StoreTables = ({ data }: { data: any }) => {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 	const navigate = useNavigate();
 
-  const toggleDropdown = (index) => {
+  const toggleDropdown = (index:number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
@@ -24,17 +24,17 @@ const StoreTables = ({ data }) => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   // Handle page change
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber:number) => setCurrentPage(pageNumber);
 
   // Handle search
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1); // Reset to first page when searching
   };
 
-  const handleRowClick = (id) => {
-		navigate(`/store/detail/${id}`);
-  };
+  const handleRowClick = (id: number) => {
+    navigate(`/store/detail/${id}`);
+};
 
   return (
     <div className="overflow-x-auto w-[100%] sm:w-full rounded-lg">
@@ -92,7 +92,7 @@ const StoreTables = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((item, index) => (
+          {currentItems.map((item:any, index:number) => (
             <tr
               key={index}
               className="transition duration-300 ease-in-out hover:bg-gray-50 hover:shadow-md cursor-pointer"

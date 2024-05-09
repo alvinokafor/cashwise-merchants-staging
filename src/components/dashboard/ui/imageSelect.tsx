@@ -2,35 +2,63 @@ import React, { useState } from 'react';
 import { MdClose, MdCloudUpload } from 'react-icons/md';
 
 const ImageUploadCard = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setImageSrc(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // const handleDragOver = (event) => {
+  //   event.preventDefault();
+  // };
+
+  // const handleDrop = (event) => {
+  //   event.preventDefault();
+  //   const file = event.dataTransfer.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setImageSrc(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const file = event.target.files[0];
+    const file = event.target.files && event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImageSrc(reader.result);
+        setImageSrc(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
-
-  const handleDragOver = (event) => {
+  
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
-
-  const handleDrop = (event) => {
+  
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImageSrc(reader.result);
+        const result = reader.result as string;
+        setImageSrc(result);
       };
       reader.readAsDataURL(file);
     }
   };
-
+  
   const handleCancel = () => {
     setImageSrc(null);
   };
