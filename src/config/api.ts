@@ -11,7 +11,7 @@ export const apiInstance = axios.create({
 // const baseURL = 'http://165.227.77.33:8105/api//auth/merchant';
 
 // Function to sign up a user
-export const signUpUser = async (userData, navigate) => {
+export const signUpUser = async (userData:any,  navigate: ReturnType<typeof useNavigate>) => {
   try {
     const response = await apiInstance.post('/register/', userData);
     // console.log(response)
@@ -36,7 +36,7 @@ export const signUpUser = async (userData, navigate) => {
       toast('Error creating account!');
       console.error('Signup error:', response.statusText);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const errorMessage = error.response.data.message || 'Error creating account!';
       toast(errorMessage);
@@ -56,7 +56,7 @@ export const signUpUser = async (userData, navigate) => {
 };
 
 // Function to log in a user
-export const loginUser = async (userData, navigate) => {
+export const loginUser = async (userData:any,  navigate: ReturnType<typeof useNavigate>) => {
   try {
     const response = await apiInstance.post('/login', userData);
     if (response.status === 200) {
@@ -80,7 +80,7 @@ export const loginUser = async (userData, navigate) => {
       toast('Error login into account!');
       console.error('login error:', response.statusText);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       // Server responded with an error status code
       const errorMessage = error.response.data.message || 'Error login into account!';
@@ -100,7 +100,7 @@ export const loginUser = async (userData, navigate) => {
 };
 
 // Function to verify OTP
-export const verifyOTP = async (otpData, navigate) => {
+export const verifyOTP = async (otpData:any,  navigate: ReturnType<typeof useNavigate>) => {
   try {
     console.log(otpData,"otp")
     const response = await apiInstance.post('/activate', otpData);
@@ -122,7 +122,7 @@ export const verifyOTP = async (otpData, navigate) => {
     }, 3000);
     
     return response.data; // Return response data if needed
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       // Server responded with an error status code
       const errorMessage = error.response.data.message || 'Error varifing account!';
@@ -143,11 +143,11 @@ export const verifyOTP = async (otpData, navigate) => {
 };
 
 // Function to reset password
-export const resetPassword = async (email) => {
+export const resetPassword = async (email: string) => {
   try {
     const response = await apiInstance.post('/reset-password', { email });
     return response.data; // Return response data if needed
-  } catch (error) {
+  } catch (error: any) {
     throw error.response.data; // Throw error if request fails
   }
 };
